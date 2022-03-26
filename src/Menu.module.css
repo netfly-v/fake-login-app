@@ -1,0 +1,12 @@
+.menu {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+.menu a {
+    margin: 20px auto 10px auto;
+    text-decoration: none;
+    color: black;
+}

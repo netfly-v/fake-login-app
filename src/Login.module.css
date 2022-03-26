@@ -1,0 +1,9 @@
+.loginPage div {
+    color: darkblue;
+    margin: 10px 0;
+}
+
+.error {
+    color: red;
+    font-weight: 400;
+}
