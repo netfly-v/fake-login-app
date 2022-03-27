@@ -7,6 +7,6 @@ export const auth = {
     storage.set(AUTH_KEY, authStatus);
   },
   isAuth() {
-    return storage.get(AUTH_KEY)
+    return storage.get(AUTH_KEY);
   },
 };

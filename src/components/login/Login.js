@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '../../constants/routes';
 import { auth } from '../../utils/auth';
-import { storage } from '../../utils/localStorage';
 import styles from './Login.module.css';
+
+
 
 const authInfo = {
   username: 'admin',
@@ -16,15 +18,8 @@ const errors = {
 
 export const Login = () => {
   const [errorMessage, setErrorMessage] = useState({});
-  const [isAuth, setIsAuth] = useState(false);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.isAuth()) {
-      navigate('/profile');
-    }
-  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -34,9 +29,8 @@ export const Login = () => {
 
     if (authInfo.username === name.value) {
       if (authInfo.password === pass.value) {
-        setIsAuth(true);
         auth.set(true);
-        navigate('/profile');
+        navigate(ROUTE.PROFILE);
       } else {
         setErrorMessage({ name: 'pass', message: errors.pass });
         auth.set(false);
@@ -53,9 +47,6 @@ export const Login = () => {
   return (
     <div className={styles.loginPage}>
       <h1>Login Page</h1>
-      {isAuth ? (
-        <div>Logged successfully</div>
-      ) : (
         <form onSubmit={handleSubmit}>
           <div className={styles.loginInput}>
             <label>Username: </label>
@@ -70,7 +61,6 @@ export const Login = () => {
           <div className={styles.authButton}></div>
           <input type="submit" />
         </form>
-      )}
     </div>
   );
 };

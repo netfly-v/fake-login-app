@@ -9,38 +9,38 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { auth } from './utils/auth';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { ROUTE } from './constants/routes';
 
-const PrivateRoute = ({ children }) => {
-  return auth.isAuth(true) ? children : <Navigate to="/login" />;
-};
+const PrivateRoute = ({ children }) => (auth.isAuth() ? children : <Navigate to={ROUTE.LOGIN} />);
+
+const LoginWithRedirect = () => (auth.isAuth() ? <Navigate to={ROUTE.PROFILE} /> : <Login />);
 
 function App() {
   return (
     <div className={styles.App}>
       <Provider store={store}>
-      <BrowserRouter>
-        <Menu />
-        <div className={styles.content}>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/news" element={<News />} />
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />›
-          </Routes>
-        </div>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Menu />
+          <div className={styles.content}>
+            <Routes>
+              <Route path={ROUTE.HOME} element={<MainPage />} />
+              <Route path={ROUTE.LOGIN} element={<LoginWithRedirect />} />
+              <Route path={ROUTE.NEWS} element={<News />} />
+              <Route
+                path={ROUTE.PROFILE}
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              ›
+            </Routes>
+          </div>
+        </BrowserRouter>
       </Provider>
     </div>
   );
 }
 
 export default App;
-
-
