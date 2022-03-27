@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../utils/auth';
+import { storage } from '../../utils/localStorage';
 import styles from './Login.module.css';
 
 const authInfo = {
@@ -14,33 +16,34 @@ const errors = {
 
 export const Login = () => {
   const [errorMessage, setErrorMessage] = useState({});
-  //   const [loginState, setLoginState] = useState('');
-  //   const [passState, setPassState] = useState('');
   const [isAuth, setIsAuth] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.isAuth()) {
+      navigate('/profile');
+    }
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const [name, pass] = e.target;
-
-    // setLoginState(name.value);
-    // setPassState(pass.value);
     console.log(name.value, pass.value);
 
     if (authInfo.username === name.value) {
       if (authInfo.password === pass.value) {
         setIsAuth(true);
-        localStorage.setItem('auth', true);
+        auth.set(true);
         navigate('/profile');
       } else {
         setErrorMessage({ name: 'pass', message: errors.pass });
-        localStorage.setItem('auth', false);
+        auth.set(false);
       }
     } else {
       setErrorMessage({ name: 'login', message: errors.login });
-      localStorage.setItem('auth', false);
+      auth.set(false);
     }
   };
 
