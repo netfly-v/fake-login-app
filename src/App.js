@@ -1,9 +1,10 @@
 import React from 'react';
 import { Menu } from './Menu';
 import { Login } from './components/login/Login';
-import { News } from './components/news/News';
+import News from './components/news/News';
 import { Profile } from './components/profile/Profile';
 import { MainPage } from './components/mainPage/MainPage';
+import './reset.css';
 import styles from './App.module.css';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { auth } from './utils/auth';

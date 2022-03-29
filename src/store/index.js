@@ -1,9 +1,10 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
+import { newsReducer } from './state/news';
 
 const reducers = combineReducers({
-  abc: () => '123',
+  news: newsReducer,
 });
 
 export const store = createStore(reducers, applyMiddleware(logger, thunkMiddleware));

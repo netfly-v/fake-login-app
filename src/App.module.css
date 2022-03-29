@@ -1,6 +1,5 @@
 .App {
   display: flex;
-  flex-direction: row;
   max-width: 1000px;
   margin: 0 auto;
   height: 100%;
@@ -17,4 +16,12 @@
 
 h1 {
   margin-top: 20px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column;
+  }
 }
