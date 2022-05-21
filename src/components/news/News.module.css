@@ -2,6 +2,9 @@
     font-weight: 700;
     text-decoration: none;
     color: darkgray;
+    text-align: left;
+    padding: 0 20px;
+    align-self: center;
 }
 
 .newsElement {
