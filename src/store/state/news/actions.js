@@ -1,3 +1,3 @@
-import { ADD_NEWS } from "./types";
+import { ADD_NEWS } from './types';
 
-export const addNews = news => ({ type: ADD_NEWS, news });
+export const addNews = news => ({ type: ADD_NEWS, news, isLoaded: true });
